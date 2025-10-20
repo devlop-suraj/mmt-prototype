@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MakeMyTrip Lite - Booking Flow Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4F6; /* Light gray background */
+        }
+        .mobile-screen {
+            width: 375px;
+            height: 812px;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.1), 0 6px 10px rgba(0,0,0,0.08);
+            border-radius: 40px;
+            border: 12px solid #1a1a1a;
+            position: relative;
+            overflow: hidden;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+        }
+        .notch {
+            width: 180px;
+            height: 28px;
+            background-color: #1a1a1a;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        .screen-content {
+            flex-grow: 1;
+            padding-top: 28px; /* Space for the notch */
+            overflow-y: auto;
+        }
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 24px 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .step-title {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+        .new-tag {
+            position: absolute;
+            top: -4px;
+            right: -8px;
+            background-color: #ef4444;
+            color: white;
+            font-size: 8px;
+            font-weight: bold;
+            padding: 1px 4px;
+            border-radius: 4px;
+            transform: rotate(15deg);
+        }
+        /* Style for the active service icon */
+        .service-icon-active span {
+            color: #3b82f6 !important;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="p-8">
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-4">Mobile App Prototype: Booking Flow</h1>
+        <p class="text-lg text-center text-gray-600 mb-12">This prototype demonstrates a standard user flow starting from a homepage.</p>
+    </div>
+
+    <div class="flex flex-wrap justify-center items-start gap-16">
+
+        <!-- Step 1: Homepage -->
+        <div class="relative pt-16">
+            <div class="step-title">
+                <h2 class="text-xl font-bold text-gray-700">Step 1: Homepage</h2>
+                <p class="text-sm text-gray-500">(Online Search)</p>
+            </div>
+            <div class="mobile-screen">
+                <div class="notch"></div>
+                <div class="screen-content bg-gray-50">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <div class="flex items-center gap-1">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wifi" viewBox="0 0 16 16"><path d="M15.384 6.115a.485.485 0 0 0-.047-.736C12.502 3.513 8.615 2.5 4.615 2.5c-3.999 0-7.887 1.013-10.722 3.379a.485.485 0 0 0-.048.736.518.518 0 0 0 .668.05A11.448 11.448 0 0 1 4.615 3.5c3.523 0 6.845.914 9.621 2.665a.518.518 0 0 0 .667-.05z"/><path d="M12.232 8.353a.485.485 0 0 0-.053-.736C10.231 6.273 7.373 5.5 4.615 5.5c-2.757 0-5.615.773-7.564 2.117a.485.485 0 0 0-.053.736.518.518 0 0 0 .67.05A8.948 8.948 0 0 1 4.615 6.5c2.31 0 4.88.647 6.942 1.803a.518.518 0 0 0 .67-.05z"/><path d="M8.949 10.59a.485.485 0 0 0-.063-.736C7.501 9.023 6.023 8.5 4.615 8.5c-1.408 0-2.887.523-4.271 1.354a.485.485 0 0 0-.063.736.518.518 0 0 0 .67.049A5.948 5.948 0 0 1 4.615 9.5c1.17 0 2.363.385 3.59.94a.518.518 0 0 0 .67-.05zM6.269 12.833a.485.485 0 0 0-.073-.736C5.67 11.67 5.02 11.5 4.615 11.5c-.405 0-1.055.17-1.58.597a.485.485 0 0 0-.073.736.518.518 0 0 0 .67.049c.14-.108.347-.205.583-.205s.443.097.583.205a.518.518 0 0 0 .67-.05z"/></svg>
+                            <span>4G</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M2 6h12v4H2V6z"/><path d="M2 4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H2zm13 2v4a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1z"/></svg>
+                        </div>
+                    </div>
+                    <div class="header bg-white">
+                        <h1 class="text-xl font-bold text-gray-800">MakeMyTrip</h1>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="text-gray-600" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/></svg>
+                    </div>
+                    <div class="p-4">
+                        <div id="service-grid" class="grid grid-cols-4 gap-y-4 gap-x-2 text-center text-gray-700 mb-6">
+                            <!-- Service icons will be dynamically updated for active state -->
+                            <a href="#" id="service-flights" class="service-icon p-1 rounded-lg hover:bg-gray-100"><div class="flex flex-col items-center"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg></div><span class="text-xs mt-2 font-medium">Flights</span></div></a>
+                            <a href="#" id="service-hotels" class="service-icon p-1 rounded-lg hover:bg-gray-100"><div class="flex flex-col items-center"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 8v-4h5v4h-5z"></path></svg></div><span class="text-xs mt-2 font-medium">Hotels</span></div></a>
+                            <a href="#" id="service-villas" class="service-icon p-1 rounded-lg hover:bg-gray-100"><div class="flex flex-col items-center"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg></div><span class="text-xs mt-2 font-medium">Villas</span></div></a>
+                            <a href="#" id="service-holidays" class="service-icon p-1 rounded-lg hover:bg-gray-100"><div class="flex flex-col items-center"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div><span class="text-xs mt-2 font-medium">Holidays</span></div></a>
+                             <a href="#" id="service-trains" class="service-icon p-1 rounded-lg hover:bg-gray-100"><div class="flex flex-col items-center"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8h.01M12 20h.01M4 12h1m11 0h1M4 20h.01M12 4V3m4 1h1m-1 16h.01M4 4h1m11 0h1m-1 16h.01M12 8a4 4 0 110 8 4 4 0 010-8z"></path></svg></div><span class="text-xs mt-2 font-medium">Trains</span></div></a>
+                             <a href="#" id="service-buses" class="service-icon p-1 rounded-lg hover:bg-gray-100"><div class="flex flex-col items-center"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l2 2h8a1 1 0 001-1z"></path></svg></div><span class="text-xs mt-2 font-medium">Buses</span></div></a>
+                             <a href="#" id="service-cabs" class="service-icon p-1 rounded-lg hover:bg-gray-100"><div class="flex flex-col items-center"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><span class="text-xs mt-2 font-medium">Cabs</span></div></a>
+                             <a href="#" id="service-tours" class="service-icon p-1 rounded-lg hover:bg-gray-100"><div class="flex flex-col items-center"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 16.382V5.618a1 1 0 00-1.447-.894L15 7m-6 13v-6.5m6 3.5V7"></path></svg></div><span class="text-xs mt-2 font-medium">Tours</span></div></a>
+                             <a href="#" id="service-visa" class="service-icon p-1 rounded-lg hover:bg-gray-100 relative"><div class="flex flex-col items-center"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg></div><span class="text-xs mt-2 font-medium">Visa</span><div class="new-tag">new</div></div></a>
+                             <a href="#" id="service-cruise" class="service-icon p-1 rounded-lg hover:bg-gray-100 relative"><div class="flex flex-col items-center"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><svg class="w-6 h-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.125-.504 1.125-1.125V14.25m-17.25 4.5v-1.875a3.375 3.375 0 003.375-3.375h1.5a1.125 1.125 0 011.125 1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375m17.25 4.5v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 00-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125h1.5m-9.375-3.375H12m-1.125-4.5v-1.5c0-.621.504-1.125 1.125-1.125h1.5c.621 0 1.125.504 1.125 1.125v1.5m-3 0h3m-3 18.75h3" /></svg></div><span class="text-xs mt-2 font-medium">Cruise</span><div class="new-tag">new</div></div></a>
+                             <a href="#" id="service-forex" class="service-icon p-1 rounded-lg hover:bg-gray-100 relative"><div class="flex flex-col items-center"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div><span class="text-xs mt-2 font-medium">Forex</span><div class="new-tag">new</div></div></a>
+                             <a href="#" id="service-insurance" class="service-icon p-1 rounded-lg hover:bg-gray-100"><div class="flex flex-col items-center"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg></div><span class="text-xs mt-2 font-medium">Insurance</span></div></a>
+                        </div>
+                        
+                        <div id="search-widget-container" class="bg-white p-4 rounded-xl shadow-lg border">
+                            <!-- Search widget content will be injected here by JS -->
+                        </div>
+
+                        <button class="w-full mt-6 bg-blue-600 text-white font-bold py-3.5 rounded-lg shadow-md hover:bg-blue-700 text-lg tracking-wider">SEARCH</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 2: Viewing Curated Listings -->
+        <div class="relative pt-16">
+            <div class="step-title">
+                <h2 class="text-xl font-bold text-gray-700">Step 2: <span id="listings-step-title">Listings</span></h2>
+                <p class="text-sm text-gray-500">(Search Results)</p>
+            </div>
+            <div class="mobile-screen">
+                <div class="notch"></div>
+                <div class="screen-content">
+                    <div class="status-bar">
+                        <span>9:42</span>
+                        <!-- ... status icons ... -->
+                    </div>
+                    <div class="header">
+                        <h1 id="listings-header" class="text-lg font-bold text-gray-800"></h1>
+                        <button class="text-blue-600 text-sm font-semibold">← Back</button>
+                    </div>
+                    <div class="p-4">
+                        <div class="bg-yellow-50 border border-yellow-300 text-yellow-800 text-xs p-3 rounded-lg mb-4 text-center">
+                           Prices may vary slightly. Activate <a href="#" class="font-bold underline">Lite Mode</a> to save data.
+                        </div>
+
+                        <!-- Filters -->
+                        <div id="filters-container" class="flex items-center justify-between mb-4 text-sm">
+                            <!-- Filters will be injected here by JS -->
+                        </div>
+
+                        <!-- Listings Container -->
+                        <div id="listings-container" class="space-y-3">
+                           <!-- Listings will be injected here by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Final Price Check & Review -->
+        <div class="relative pt-16">
+            <div class="step-title">
+                <h2 class="text-xl font-bold text-gray-700">Step 3: Final Price Check</h2>
+                 <p class="text-sm text-gray-500">(Minimal Live Connection)</p>
+            </div>
+            <div class="mobile-screen">
+                <div class="notch"></div>
+                <div class="screen-content bg-gray-50">
+                    <div class="status-bar">
+                        <span>9:43</span>
+                        <!-- ... status icons ... -->
+                    </div>
+                    <div class="header bg-white">
+                        <h1 class="text-lg font-bold text-gray-800">Review & Lock-in</h1>
+                         <button class="text-blue-600 text-sm font-semibold">← Back</button>
+                    </div>
+                    <div class="p-4 space-y-4">
+                        <div class="border-2 border-dashed border-blue-400 bg-blue-50 text-center p-3 rounded-lg">
+                            <p class="font-bold text-blue-800 text-sm">Data Required: ≈ 50 KB</p>
+                        </div>
+                        
+                        <!-- Summary Container -->
+                        <div id="summary-container" class="bg-white p-4 rounded-xl shadow-sm border">
+                             <!-- Summary will be injected here by JS -->
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl shadow-sm border">
+                             <h3 class="font-semibold text-gray-500 text-sm mb-3">PRICE CHECK</h3>
+                             <div class="flex justify-between items-center mb-2">
+                                 <span class="text-gray-600">Cached Price:</span>
+                                 <span id="cached-price" class="text-gray-600 line-through"></span>
+                             </div>
+                             <div class="flex justify-between items-center text-lg font-bold mb-3">
+                                 <span class="text-green-600">Live Price:</span>
+                                 <span id="live-price" class="text-green-600"></span>
+                             </div>
+                             <p class="text-center text-xs bg-red-50 text-red-700 p-2 rounded-md">
+                                 Variance: <span id="price-variance" class="font-bold"></span>. Price secured for 5 mins on 2G.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-xl shadow-sm border">
+                             <h3 class="font-semibold text-gray-500 text-sm mb-2">PASSENGER (0 Data)</h3>
+                             <p class="font-bold text-gray-800">Suraj Kumar</p>
+                             <div class="flex justify-between text-sm text-gray-600 mt-2 border-t pt-2">
+                                <span>Confirm via SMS (Recommended)</span>
+                                <div class="w-11 h-6 bg-green-500 rounded-full p-1 flex items-center cursor-pointer">
+                                    <div class="w-4 h-4 bg-white rounded-full shadow-md transform translate-x-5"></div>
+                                </div>
+                             </div>
+                        </div>
+
+                    </div>
+                    <div class="p-4 mt-auto border-t bg-white">
+                        <button class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg shadow-sm hover:bg-blue-700">Lock Price & Pay</button>
+                        <p class="text-center text-xs text-gray-500 mt-1 font-medium">Small Transaction Data</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 4: Payment -->
+        <div class="relative pt-16">
+            <div class="step-title">
+                <h2 class="text-xl font-bold text-gray-700">Step 4: Payment</h2>
+                <p class="text-sm text-gray-500">(Hybrid Offline-Online)</p>
+            </div>
+            <div class="mobile-screen">
+                <div class="notch"></div>
+                 <div class="screen-content bg-gray-50">
+                    <div class="status-bar"><span>9:44</span></div>
+                    <div class="header bg-white">
+                        <h1 class="text-lg font-bold text-gray-800">Secure Payment</h1>
+                         <button class="text-blue-600 text-sm font-semibold">← Back</button>
+                    </div>
+                    <div class="p-4 space-y-4">
+                        <div class="text-center">
+                            <p class="text-gray-600">Price to Pay</p>
+                            <p id="payment-price" class="text-4xl font-bold text-gray-900"></p>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl shadow-sm border">
+                            <h3 class="font-semibold text-gray-500 text-sm mb-3">PAYMENT METHOD</h3>
+                            <div class="space-y-3">
+                                <div class="border-2 border-blue-500 rounded-lg p-3">
+                                    <label class="font-bold text-blue-800 flex items-center">
+                                        <input type="radio" name="payment" class="mr-2" checked>
+                                        UPI / Wallet (Recommended)
+                                    </label>
+                                    <input type="text" value="SurajK@bank.com" class="w-full bg-gray-100 border border-gray-300 rounded-md py-2 px-3 mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter UPI ID">
+                                </div>
+                                 <div class="border rounded-lg p-3">
+                                    <label class="font-semibold text-gray-800 flex items-center">
+                                        <input type="radio" name="payment" class="mr-2">
+                                        Pay via SMS Link
+                                    </label>
+                                    <p class="text-xs text-gray-500 mt-1 ml-5">We'll send an SMS link. Open it later on Wi-Fi or pay at a nearby agent.</p>
+                                </div>
+                                <div class="border rounded-lg p-3">
+                                    <label class="font-semibold text-gray-800 flex items-center">
+                                        <input type="radio" name="payment" class="mr-2">
+                                        e-Challan through Bank
+                                    </label>
+                                    <p class="text-xs text-gray-500 mt-1 ml-5">Generate a challan to pay at your nearest bank branch.</p>
+                                </div>
+                                <div class="border rounded-lg p-3">
+                                    <label class="font-semibold text-gray-800 flex items-center">
+                                        <input type="radio" name="payment" class="mr-2">
+                                        Credit / Debit Card
+                                    </label>
+                                     <p class="text-xs text-gray-500 mt-1 ml-5">Requires stable connection.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="p-4 mt-auto border-t bg-white">
+                        <button class="w-full bg-green-600 text-white font-bold py-3 rounded-lg shadow-sm hover:bg-green-700">Complete Booking</button>
+                        <p class="text-center text-xs text-green-700 mt-1 font-medium">Data Cost: ≈ 100 KB</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 5: Confirmation -->
+        <div class="relative pt-16">
+            <div class="step-title">
+                <h2 class="text-xl font-bold text-gray-700">Step 5: Confirmation</h2>
+                <p class="text-sm text-gray-500">(Offline Access)</p>
+            </div>
+            <div class="mobile-screen">
+                <div class="notch"></div>
+                <div class="screen-content bg-green-50">
+                    <div class="status-bar"><span>9:45</span></div>
+                     <div class="p-8 flex flex-col justify-center items-center text-center h-full">
+                        <div class="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center mb-6">
+                            <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <h1 class="text-2xl font-bold text-green-800 mb-2">Booking Confirmed!</h1>
+                        <p class="text-xs text-gray-500 mb-4">(Data Used: ≈5 KB)</p>
+                        
+                        <p class="text-gray-700 font-medium">Booking ID: <span class="font-bold bg-gray-200 px-2 py-1 rounded">MMTL123456</span></p>
+
+                        <div id="confirmation-details-container" class="bg-white/70 p-4 rounded-xl text-left w-full my-6 border">
+                           <!-- Confirmation details will be injected here by JS -->
+                        </div>
+                        
+                        <div class="bg-blue-100 border border-blue-300 p-4 rounded-xl w-full text-center">
+                            <h3 class="font-bold text-blue-800">Your E-Ticket is Ready for Offline Use</h3>
+                            <button class="mt-3 bg-blue-600 text-white font-bold py-2 px-6 rounded-lg text-sm shadow-sm hover:bg-blue-700">View Offline Ticket (0 MB)</button>
+                        </div>
+                        
+                        <div class="mt-auto w-full text-center py-4">
+                            <p class="text-sm text-gray-600 font-semibold">Data Saved in this Booking: <span class="text-green-600">1.5 MB</span></p>
+                            <a href="#" class="text-xs text-blue-600 font-bold">Share Your Data Savings</a>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<script>
+    // --- CONTENT TEMPLATES ---
+    const templates = {
+        flights: {
+            searchWidget: `
+                <div class="flex border-b mb-4">
+                    <button class="flex-grow text-center py-2 text-sm font-semibold text-blue-600 border-b-2 border-blue-600">Flights</button>
+                    <button class="flex-grow text-center py-2 text-sm font-semibold text-gray-500 hover:text-blue-600">Hotels</button>
+                    <button class="flex-grow text-center py-2 text-sm font-semibold text-gray-500 hover:text-blue-600">Trains</button>
+                </div>
+                <div class="relative flex items-center mb-3">
+                    <div class="w-1/2">
+                        <label class="text-xs text-gray-500 px-3">From</label>
+                        <input type="text" value="Mumbai" class="w-full text-lg font-bold p-1 px-3 bg-transparent focus:outline-none">
+                    </div>
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gray-100 border-2 border-white rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
+                    </div>
+                    <div class="w-1/2 text-right border-l">
+                            <label class="text-xs text-gray-500 px-3">To</label>
+                        <input type="text" value="Goa" class="w-full text-lg font-bold p-1 px-3 bg-transparent focus:outline-none text-right">
+                    </div>
+                </div>
+                <div class="flex items-center mb-3 border-t pt-2">
+                    <div class="w-1/2">
+                        <label class="text-xs text-gray-500 px-3">Departure</label>
+                        <input type="text" value="15 Dec, Sat" class="w-full font-bold p-1 px-3 bg-transparent focus:outline-none">
+                    </div>
+                    <div class="w-1/2 text-left border-l">
+                            <label class="text-xs text-gray-500 px-3">Return</label>
+                        <input type="text" placeholder="-- Tap to add --" class="w-full font-bold p-1 px-3 bg-transparent focus:outline-none placeholder-gray-400">
+                    </div>
+                </div>
+                <div class="border-t pt-2">
+                    <label class="text-xs text-gray-500 px-3">Travellers & Class</label>
+                    <input type="text" value="1 Adult, Economy" class="w-full font-bold p-1 px-3 bg-transparent focus:outline-none">
+                </div>
+            `,
+            listingsHeader: 'Goa Flight Options',
+            listingsStepTitle: 'Flight Listings',
+            filters: `
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Time <span class="font-sans">▾</span></button>
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Price Range <span class="font-sans">▾</span></button>
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Airlines <span class="font-sans">▾</span></button>
+            `,
+            listings: `
+                <div class="bg-white p-4 rounded-xl border-2 border-blue-500 shadow-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <img src="https://placehold.co/24x24/FF6600/FFFFFF?text=SJ" class="rounded-full" alt="SpiceJet Logo">
+                            <span class="font-bold text-gray-800">SpiceJet SG 456</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">₹ 4,250</span>
+                    </div>
+                    <div class="text-sm text-gray-600 flex justify-between items-center mb-4">
+                        <span>BOM → GOI</span>
+                        <span>10:00 → 13:00</span>
+                        <span>3h 0m, 1 Stop</span>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg shadow-sm hover:bg-blue-700">Proceed to Book</button>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <img src="https://placehold.co/24x24/0000FF/FFFFFF?text=6E" class="rounded-full" alt="Indigo Logo">
+                            <span class="font-bold text-gray-800">Indigo 6E 123</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">₹ 4,500</span>
+                    </div>
+                </div>
+            `,
+            summary: `
+                <h3 class="font-semibold text-gray-500 text-sm mb-2">FLIGHT SUMMARY</h3>
+                <p class="font-bold text-gray-800">SpiceJet SG 456</p>
+                <p class="text-gray-600">BOM → GOI | Date: Dec 15</p>
+            `,
+            prices: { cached: 4250, live: 4285 },
+            confirmation: `
+                <p class="text-sm font-semibold text-gray-800 mb-2">✓ Core flight info sent via SMS</p>
+                <p class="text-xs text-gray-600">A minimal SMS with your Flight No., Date, Time, and Booking ID has been sent.</p>
+            `
+        },
+        hotels: {
+            searchWidget: `
+                 <div class="flex border-b mb-4">
+                    <button class="flex-grow text-center py-2 text-sm font-semibold text-gray-500 hover:text-blue-600">Flights</button>
+                    <button class="flex-grow text-center py-2 text-sm font-semibold text-blue-600 border-b-2 border-blue-600">Hotels</button>
+                    <button class="flex-grow text-center py-2 text-sm font-semibold text-gray-500 hover:text-blue-600">Trains</button>
+                </div>
+                <div class="relative flex items-center mb-3">
+                    <div class="w-full">
+                        <label class="text-xs text-gray-500 px-3">City, Property Name or Location</label>
+                        <input type="text" value="Goa, India" class="w-full text-lg font-bold p-1 px-3 bg-transparent focus:outline-none">
+                    </div>
+                </div>
+                <div class="flex items-center mb-3 border-t pt-2">
+                    <div class="w-1/2">
+                        <label class="text-xs text-gray-500 px-3">Check-in</label>
+                        <input type="text" value="15 Dec, Sat" class="w-full font-bold p-1 px-3 bg-transparent focus:outline-none">
+                    </div>
+                    <div class="w-1/2 text-left border-l">
+                            <label class="text-xs text-gray-500 px-3">Check-out</label>
+                        <input type="text" value="18 Dec, Tue" class="w-full font-bold p-1 px-3 bg-transparent focus:outline-none">
+                    </div>
+                </div>
+                <div class="border-t pt-2">
+                    <label class="text-xs text-gray-500 px-3">Rooms & Guests</label>
+                    <input type="text" value="1 Room, 2 Adults" class="w-full font-bold p-1 px-3 bg-transparent focus:outline-none">
+                </div>
+            `,
+            listingsHeader: 'Goa Hotel Options',
+            listingsStepTitle: 'Hotel Listings',
+            filters: `
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Rating <span class="font-sans">▾</span></button>
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Price Range <span class="font-sans">▾</span></button>
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Amenities <span class="font-sans">▾</span></button>
+            `,
+            listings: `
+                <div class="bg-white p-4 rounded-xl border-2 border-blue-500 shadow-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-bold text-gray-800">Taj Fort Aguada Resort</span>
+                        <span class="text-xl font-bold text-gray-900">₹ 12,500</span>
+                    </div>
+                    <div class="text-sm text-gray-600 flex justify-between items-center mb-4">
+                        <span>★★★★★ | 9.2 Superb</span>
+                        <span>per night</span>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg shadow-sm hover:bg-blue-700">Select Room</button>
+                </div>
+                 <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-bold text-gray-800">Vivanta Goa, Panaji</span>
+                        <span class="text-xl font-bold text-gray-900">₹ 9,800</span>
+                    </div>
+                     <div class="text-sm text-gray-600 flex justify-between items-center">
+                        <span>★★★★★ | 8.8 Excellent</span>
+                        <span>per night</span>
+                    </div>
+                </div>
+            `,
+            summary: `
+                <h3 class="font-semibold text-gray-500 text-sm mb-2">HOTEL SUMMARY</h3>
+                <p class="font-bold text-gray-800">Taj Fort Aguada Resort & Spa</p>
+                <p class="text-gray-600">Check-in: 15 Dec | Check-out: 18 Dec</p>
+                <p class="text-gray-600">1 Room, 2 Adults</p>
+            `,
+            prices: { cached: 12500, live: 12500 },
+            confirmation: `
+                <p class="text-sm font-semibold text-gray-800 mb-2">✓ Core hotel info sent via SMS</p>
+                <p class="text-xs text-gray-600">A minimal SMS with your Hotel Name, Check-in Date, and Booking ID has been sent.</p>
+            `
+        },
+        villas: {
+            searchWidget: `
+                <div class="relative flex items-center mb-3">
+                    <div class="w-full">
+                        <label class="text-xs text-gray-500 px-3">Destination</label>
+                        <input type="text" value="Lonavala, India" class="w-full text-lg font-bold p-1 px-3 bg-transparent focus:outline-none">
+                    </div>
+                </div>
+                <div class="flex items-center mb-3 border-t pt-2">
+                    <div class="w-1/2">
+                        <label class="text-xs text-gray-500 px-3">Check-in</label>
+                        <input type="text" value="15 Dec, Sat" class="w-full font-bold p-1 px-3 bg-transparent focus:outline-none">
+                    </div>
+                    <div class="w-1/2 text-left border-l">
+                            <label class="text-xs text-gray-500 px-3">Check-out</label>
+                        <input type="text" value="18 Dec, Tue" class="w-full font-bold p-1 px-3 bg-transparent focus:outline-none">
+                    </div>
+                </div>
+                <div class="border-t pt-2">
+                    <label class="text-xs text-gray-500 px-3">Guests</label>
+                    <input type="text" value="1 Villa, 6 Adults" class="w-full font-bold p-1 px-3 bg-transparent focus:outline-none">
+                </div>
+            `,
+            listingsHeader: 'Lonavala Villa Options',
+            listingsStepTitle: 'Villa Listings',
+            filters: `
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Bedrooms <span class="font-sans">▾</span></button>
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Price <span class="font-sans">▾</span></button>
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Pool <span class="font-sans">▾</span></button>
+            `,
+            listings: `
+                <div class="bg-white p-4 rounded-xl border-2 border-blue-500 shadow-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-bold text-gray-800">The Machan</span>
+                        <span class="text-xl font-bold text-gray-900">₹ 25,000</span>
+                    </div>
+                    <div class="text-sm text-gray-600 flex justify-between items-center mb-4">
+                        <span>3 Bedroom Treehouse</span>
+                        <span>per night</span>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg shadow-sm hover:bg-blue-700">Book Villa</button>
+                </div>
+            `,
+            summary: `
+                <h3 class="font-semibold text-gray-500 text-sm mb-2">VILLA SUMMARY</h3>
+                <p class="font-bold text-gray-800">The Machan, Lonavala</p>
+                <p class="text-gray-600">Check-in: 15 Dec | Check-out: 18 Dec</p>
+            `,
+            prices: { cached: 25000, live: 25000 },
+            confirmation: `
+                <p class="text-sm font-semibold text-gray-800 mb-2">✓ Core villa info sent via SMS</p>
+                <p class="text-xs text-gray-600">A minimal SMS with your Villa Name and Check-in Date has been sent.</p>
+            `
+        },
+        trains: {
+             searchWidget: `
+                 <div class="flex border-b mb-4">
+                    <button class="flex-grow text-center py-2 text-sm font-semibold text-gray-500 hover:text-blue-600">Flights</button>
+                    <button class="flex-grow text-center py-2 text-sm font-semibold text-gray-500 hover:text-blue-600">Hotels</button>
+                    <button class="flex-grow text-center py-2 text-sm font-semibold text-blue-600 border-b-2 border-blue-600">Trains</button>
+                </div>
+                 <div class="relative flex items-center mb-3">
+                    <div class="w-1/2">
+                        <label class="text-xs text-gray-500 px-3">From Station</label>
+                        <input type="text" value="Delhi (NDLS)" class="w-full text-lg font-bold p-1 px-3 bg-transparent focus:outline-none">
+                    </div>
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gray-100 border-2 border-white rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
+                    </div>
+                    <div class="w-1/2 text-right border-l">
+                        <label class="text-xs text-gray-500 px-3">To Station</label>
+                        <input type="text" value="Mumbai (BCT)" class="w-full text-lg font-bold p-1 px-3 bg-transparent focus:outline-none text-right">
+                    </div>
+                </div>
+                <div class="flex items-center mb-3 border-t pt-2">
+                    <div class="w-full">
+                        <label class="text-xs text-gray-500 px-3">Travel Date</label>
+                        <input type="text" value="20 Dec, Thu" class="w-full font-bold p-1 px-3 bg-transparent focus:outline-none">
+                    </div>
+                </div>
+            `,
+            listingsHeader: 'Delhi → Mumbai Trains',
+            listingsStepTitle: 'Train Listings',
+            filters: `
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Time <span class="font-sans">▾</span></button>
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Class <span class="font-sans">▾</span></button>
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Quota <span class="font-sans">▾</span></button>
+            `,
+            listings: `
+                <div class="bg-white p-4 rounded-xl border-2 border-blue-500 shadow-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-bold text-gray-800">Rajdhani Express (12952)</span>
+                        <span class="text-xl font-bold text-gray-900">₹ 2,850</span>
+                    </div>
+                    <div class="text-sm text-gray-600 flex justify-between items-center mb-4">
+                        <span>16:55 → 08:35</span>
+                        <span>15h 40m</span>
+                        <span class="font-bold text-green-600">Available</span>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg shadow-sm hover:bg-blue-700">Book Now</button>
+                </div>
+            `,
+            summary: `
+                <h3 class="font-semibold text-gray-500 text-sm mb-2">TRAIN SUMMARY</h3>
+                <p class="font-bold text-gray-800">Rajdhani Express (12952)</p>
+                <p class="text-gray-600">NDLS → BCT | Date: Dec 20</p>
+            `,
+            prices: { cached: 2850, live: 2865 },
+            confirmation: `
+                <p class="text-sm font-semibold text-gray-800 mb-2">✓ Core train info sent via SMS</p>
+                <p class="text-xs text-gray-600">A minimal SMS with your PNR, Train No, and Date has been sent.</p>
+            `
+        },
+        buses: {
+            searchWidget: `
+                <div class="relative flex items-center mb-3">
+                     <div class="w-1/2">
+                        <label class="text-xs text-gray-500 px-3">From City</label>
+                        <input type="text" value="Pune" class="w-full text-lg font-bold p-1 px-3 bg-transparent focus:outline-none">
+                    </div>
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gray-100 border-2 border-white rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
+                    </div>
+                    <div class="w-1/2 text-right border-l">
+                        <label class="text-xs text-gray-500 px-3">To City</label>
+                        <input type="text" value="Goa" class="w-full text-lg font-bold p-1 px-3 bg-transparent focus:outline-none text-right">
+                    </div>
+                </div>
+                <div class="flex items-center mb-3 border-t pt-2">
+                    <div class="w-full">
+                        <label class="text-xs text-gray-500 px-3">Date of Journey</label>
+                        <input type="text" value="22 Dec, Sat" class="w-full font-bold p-1 px-3 bg-transparent focus:outline-none">
+                    </div>
+                </div>
+            `,
+            listingsHeader: 'Pune → Goa Buses',
+            listingsStepTitle: 'Bus Listings',
+            filters: `
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Time <span class="font-sans">▾</span></button>
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Bus Type <span class="font-sans">▾</span></button>
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Operator <span class="font-sans">▾</span></button>
+            `,
+            listings: `
+                <div class="bg-white p-4 rounded-xl border-2 border-blue-500 shadow-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-bold text-gray-800">VRL Travels</span>
+                        <span class="text-xl font-bold text-gray-900">₹ 1,100</span>
+                    </div>
+                    <div class="text-sm text-gray-600 flex justify-between items-center mb-4">
+                        <span>21:00 → 08:00</span>
+                        <span>AC Sleeper</span>
+                        <span class="font-bold text-green-600">12 Seats</span>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg shadow-sm hover:bg-blue-700">Select Seats</button>
+                </div>
+            `,
+            summary: `
+                <h3 class="font-semibold text-gray-500 text-sm mb-2">BUS SUMMARY</h3>
+                <p class="font-bold text-gray-800">VRL Travels, AC Sleeper</p>
+                <p class="text-gray-600">Pune → Goa | Date: Dec 22</p>
+            `,
+            prices: { cached: 1100, live: 1100 },
+            confirmation: `
+                <p class="text-sm font-semibold text-gray-800 mb-2">✓ Core bus info sent via SMS</p>
+                <p class="text-xs text-gray-600">A minimal SMS with your Bus Operator, PNR, and Date has been sent.</p>
+            `
+        },
+        cabs: {
+            searchWidget: `
+                <div class="space-y-3">
+                    <div>
+                        <label class="text-xs text-gray-500 px-3">Pickup Location</label>
+                        <input type="text" value="Mumbai Airport (BOM)" class="w-full text-lg font-bold p-1 px-3 bg-transparent focus:outline-none border-b">
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-500 px-3">Drop Location</label>
+                        <input type="text" value="Colaba, Mumbai" class="w-full text-lg font-bold p-1 px-3 bg-transparent focus:outline-none border-b">
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-500 px-3">Pickup Date & Time</label>
+                        <input type="text" value="15 Dec, 14:00" class="w-full font-bold p-1 px-3 bg-transparent focus:outline-none">
+                    </div>
+                </div>
+            `,
+            listingsHeader: 'Airport Cabs',
+            listingsStepTitle: 'Cab Listings',
+            filters: `
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Car Type<span class="font-sans">▾</span></button>
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Price <span class="font-sans">▾</span></button>
+                <button class="bg-gray-100 border border-gray-300 rounded-full px-4 py-1">Offers <span class="font-sans">▾</span></button>
+            `,
+            listings: `
+                <div class="bg-white p-4 rounded-xl border-2 border-blue-500 shadow-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-bold text-gray-800">Sedan (Dzire or similar)</span>
+                        <span class="text-xl font-bold text-gray-900">₹ 850</span>
+                    </div>
+                    <div class="text-sm text-gray-600 flex justify-between items-center mb-4">
+                        <span>Fits 4 | 2 bags</span>
+                        <span>Includes Tolls & Taxes</span>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg shadow-sm hover:bg-blue-700">Book Sedan</button>
+                </div>
+                 <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-bold text-gray-800">SUV (Ertiga or similar)</span>
+                        <span class="text-xl font-bold text-gray-900">₹ 1,250</span>
+                    </div>
+                </div>
+            `,
+            summary: `
+                <h3 class="font-semibold text-gray-500 text-sm mb-2">CAB SUMMARY</h3>
+                <p class="font-bold text-gray-800">Sedan (Dzire or similar)</p>
+                <p class="text-gray-600">Mumbai Airport → Colaba</p>
+            `,
+            prices: { cached: 850, live: 850 },
+            confirmation: `
+                <p class="text-sm font-semibold text-gray-800 mb-2">✓ Core cab info sent via SMS</p>
+                <p class="text-xs text-gray-600">A minimal SMS with your Driver and Car details will be sent shortly.</p>
+            `
+        }
+        // Placeholder templates for other services will be generated by copying 'flights'
+    };
+
+    // --- DOM Elements ---
+    const elements = {
+        searchWidgetContainer: document.getElementById('search-widget-container'),
+        listingsHeader: document.getElementById('listings-header'),
+        listingsStepTitle: document.getElementById('listings-step-title'),
+        filtersContainer: document.getElementById('filters-container'),
+        listingsContainer: document.getElementById('listings-container'),
+        summaryContainer: document.getElementById('summary-container'),
+        confirmationContainer: document.getElementById('confirmation-details-container'),
+        serviceIcons: document.querySelectorAll('.service-icon'),
+        cachedPrice: document.getElementById('cached-price'),
+        livePrice: document.getElementById('live-price'),
+        priceVariance: document.getElementById('price-variance'),
+        paymentPrice: document.getElementById('payment-price')
+    };
+
+    // --- LOGIC ---
+    function generatePlaceholderTemplate(serviceName) {
+        // Use flights template as a base for placeholders
+        const base = JSON.parse(JSON.stringify(templates.flights));
+        const capName = serviceName.charAt(0).toUpperCase() + serviceName.slice(1);
+        base.listingsHeader = `${capName} Options`;
+        base.listingsStepTitle = `${capName} Listings`;
+        base.summary = `
+            <h3 class="font-semibold text-gray-500 text-sm mb-2">${capName.toUpperCase()} SUMMARY</h3>
+            <p class="font-bold text-gray-800">Details for ${capName} booking</p>
+            <p class="text-gray-600">Placeholder Info | Date: Dec 15</p>
+        `;
+        base.confirmation = `
+            <p class="text-sm font-semibold text-gray-800 mb-2">✓ Core ${serviceName} info sent via SMS</p>
+            <p class="text-xs text-gray-600">A minimal SMS with your booking details has been sent.</p>
+        `;
+        return base;
+    }
+
+    function switchBookingFlow(type = 'flights') {
+        // If a template doesn't exist, create a placeholder one
+        if (!templates[type]) {
+            templates[type] = generatePlaceholderTemplate(type);
+        }
+        const content = templates[type];
+
+        // Update active icon
+        elements.serviceIcons.forEach(icon => {
+            icon.classList.remove('service-icon-active');
+        });
+        document.getElementById(`service-${type}`).classList.add('service-icon-active');
+
+        // Update content on all screens
+        elements.searchWidgetContainer.innerHTML = content.searchWidget;
+        elements.listingsHeader.textContent = content.listingsHeader;
+        elements.listingsStepTitle.textContent = content.listingsStepTitle;
+        elements.filtersContainer.innerHTML = content.filters;
+        elements.listingsContainer.innerHTML = content.listings;
+        elements.summaryContainer.innerHTML = content.summary;
+        
+        // Update prices
+        const formatter = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 });
+        const cached = content.prices.cached;
+        const live = content.prices.live;
+        const variance = live - cached;
+        
+        elements.cachedPrice.textContent = formatter.format(cached);
+        elements.livePrice.textContent = formatter.format(live);
+        elements.priceVariance.textContent = `${variance >= 0 ? '+' : ''}${formatter.format(variance)}`;
+        elements.paymentPrice.textContent = formatter.format(live);
+
+
+        elements.confirmationContainer.innerHTML = content.confirmation;
+    }
+
+    // --- EVENT LISTENERS ---
+    const allServices = ['flights', 'hotels', 'villas', 'holidays', 'trains', 'buses', 'cabs', 'tours', 'visa', 'cruise', 'forex', 'insurance'];
+    
+    allServices.forEach(service => {
+        const el = document.getElementById(`service-${service}`);
+        if (el) {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchBookingFlow(service);
+            });
+        }
+    });
+
+    // --- INITIAL LOAD ---
+    window.addEventListener('DOMContentLoaded', () => {
+        switchBookingFlow('flights'); // Set flights as the default view
+    });
+
+</script>
+</body>
+</html>
+
